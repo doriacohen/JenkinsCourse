@@ -63,7 +63,7 @@ pipeline {
 	  
 	  stage('C') {
 			agent {
-                label 'slave'
+                label 'slave01'
             }
 	     when {
 			expression {
