@@ -1,81 +1,71 @@
-pipeline {
-  agent { node { label 'slave01' } }
-//   agent any
-//   environment{
-// 	//SERVER_CREDENTIALS = credentials('SECRET_TEXT')
-// 	VERSION = "1.0.0.1"
-	
-//   }
+//This is a jenkins file that will pull from the master user.
+//I created 4 choice parameters - All, C, Bash and Python. This parameters are saved as $LANGUAGE.
 
-   stages {
-      stage('Clone Sources') {
+pipeline {
+  agent { node { label 'slave01' } } //agent any
+  stages {
+    stage('Clone Sources') {
         steps {
-          checkout scm
+          checkout scm			
         } 
-      }//stage('Clone Sources')
-	  
-	  stage("Env Variables") {
-            steps {
-				//echo "${env.Language}"
-                sh "printenv"
-            }
-			
-        }//stage("Env Variables")
-	  
-      stage('All') {
-		 when {
-			expression {
-				env.Language=="All"
-			}
-		 }
+     }	 
+    stage('Executing Bash script') {
+      steps {      
+        sh '''
+          if [ "$LANGUAGE" = "Bash" ] || [ "$LANGUAGE" = "All" ]; then
+            cd ${WORKSPACE}/Scripts/
+            chmod 755 Bash_script.sh
+            ./Bash_script.sh 
+            ./Bash_script.sh >> output.txt
+          else
+            echo "$LANGUAGE file is selected! "
+          fi
+        '''
+       }
+      }     
+      stage('Executing Python script') {
          steps {
-            echo 'ALL stage running'
-            sh 'echo "My first pipeline"'
             sh '''
-                echo "By the way, I can do more stuff in here"
-                ls -la ~
+            if [ "$LANGUAGE" = "Python" ] || [ "$LANGUAGE" = "All" ]; then
+               cd ${WORKSPACE}/Scripts/
+               chmod 755 Python_script.py
+               ${WORKSPACE}/scripts/Python_script.py $LANGUAGE
+               ${WORKSPACE}/scripts/Python_script.py $LANGUAGE >> output.txt
+            else
+               echo "$LANGUAGE file is selected! "
+            fi
             '''
          }
-      }//stage('All')
-	  
-      stage('Python') {
-	     when {
-			expression {
-				env.Language=="Python" || env.Language=="All"
-			}
-		 }
+      }
+      stage('Executing C exe file') {
          steps {
-            echo 'Python stage running'
+            sh '''
+              if [ "$LANGUAGE" = "C" ] || [ "$LANGUAGE" = "All" ]; then
+                cd ${WORKSPACE}/Scripts/
+                chmod 755 C_script.c
+                gcc C_script.c -o C_script
+		./C_script 
+		./C_script >> output.txt
+              else
+                echo "$LANGUAGE file is selected! "
+              fi
+            '''
          }
-      }//stage('Python')
-	  
-      stage('Bash') {
-	     when {
-			expression {
-				env.Language=="Bash" || env.Language=="All"
-			}
-		 }
-         steps {
-            echo 'Bash stage running'
+      }      
+      stage('Creating log file') {
+        steps {
+          sh '''
+	    logFile="${HOME}/logdir/logFile"
+	    mkdir -p ${HOME}/logdir/
+            if [ -f "${logFile}" ]; then
+                echo "A log file is already exists"
+            else
+	        touch ${logFile}
+            fi
+	    cat ${WORKSPACE}/scripts/output.txt > ${logFile}
+	    date >> ${logFile}
+           '''
          }
-		 
-      }//stage('Bash')
-	  
-	  stage('C') {
-			agent {
-                label 'slave01'
-            }
-	     when {
-			expression {
-				env.Language=="C" || env.Language=="All"
-			}
-		 }
-         steps {
-            echo 'C stage running'
-         }
-		 
-      }//stage('C')
-      
-   }//stages
-   
-}//pipeline
+      }
+   }
+}
