@@ -1,11 +1,11 @@
 pipeline {
-  //agent { node { label 'slave01' } }
-  agent any
-  environment{
-	//SERVER_CREDENTIALS = credentials('SECRET_TEXT')
-	VERSION = "1.0.0.1"
+  agent { node { label 'slave01' } }
+//   agent any
+//   environment{
+// 	//SERVER_CREDENTIALS = credentials('SECRET_TEXT')
+// 	VERSION = "1.0.0.1"
 	
-  }
+//   }
 
    stages {
       stage('Clone Sources') {
