@@ -52,20 +52,20 @@ pipeline {
             '''
          }
       }      
-//       stage('Creating log file') {
-//         steps {
-//           sh '''
-// 	    logFile="${HOME}/logdir/logFile"
-// 	    mkdir -p ${HOME}/logdir/
-//             if [ -f "${logFile}" ]; then
-//                 echo "A log file is already exists"
-//             else
-// 	        touch ${logFile}
-//             fi
-// 	    cat ${WORKSPACE}/scripts/output.txt > ${logFile}
-// 	    date >> ${logFile}
-//            '''
-//          }
-//       }
+      stage('Creating log file') {
+        steps {
+          sh '''
+	    logFile="${HOME}/logdir/logFile"
+	    mkdir -p ${HOME}/logdir/
+            if [ -f "${logFile}" ]; then
+                echo "A log file is already exists"
+            else
+	        touch ${logFile}
+            fi
+	    cat ${WORKSPACE}/scripts/output.txt > ${logFile}
+	    date >> ${logFile}
+           '''
+         }
+      }
    }
 }
