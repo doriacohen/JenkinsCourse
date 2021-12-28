@@ -75,33 +75,6 @@ pipeline {
          }
 		 
       }//stage('C')
-	  
-	  stage('Powershell') {
-			agent {
-                label 'Windows'
-            }
-	     when {
-			expression {
-				env.Language=="Powershell" || env.Language=="All"
-			}
-		 }
-         steps {
-            echo 'Powershell stage running'
-			powershell '''
-				Write-Output "from powershell step on Node: $($env:COMPUTERNAME)"
-				
-				#Write-Host "Get-Variable -Scope Global"
-				#Get-Variable -Scope Global
-				#Write-Host "Get-ChildItem env:"
-				#(gci env:*).GetEnumerator() | Sort-Object Name | Out-String
-				
-				Set-Location -Path (Join-Path ($env:WORKSPACE) -ChildPath Scripts)
-				#Get-ChildItem
-				Invoke-Expression -Command (Get-Content -Path powershell.ps1)
-			'''
-		}
-		 
-      }//stage('Powershell')
       
    }//stages
    
