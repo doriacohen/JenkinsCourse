@@ -14,9 +14,9 @@ pipeline {
         sh '''
           if [ "$LANGUAGE" = "Bash" ] || [ "$LANGUAGE" = "All" ]; then
             cd ${WORKSPACE}/Scripts/
-            chmod 755 Bash_script.sh
-            ./Bash_script.sh 
-            ./Bash_script.sh >> output.txt
+            chmod 755 bash_project.sh
+            ./bash_project.sh 
+            ./bash_project.sh >> output.txt
           else
             echo "$LANGUAGE file is selected! "
           fi
@@ -28,9 +28,9 @@ pipeline {
             sh '''
             if [ "$LANGUAGE" = "Python" ] || [ "$LANGUAGE" = "All" ]; then
                cd ${WORKSPACE}/Scripts/
-               chmod 755 Python_script.py
-               ${WORKSPACE}/scripts/Python_script.py $LANGUAGE
-               ${WORKSPACE}/scripts/Python_script.py $LANGUAGE >> output.txt
+               chmod 755 python_project.py
+               ${WORKSPACE}/Scripts/python_project.py $LANGUAGE
+               ${WORKSPACE}/Scripts/python_project.py $LANGUAGE >> output.txt
             else
                echo "$LANGUAGE file is selected! "
             fi
@@ -42,10 +42,10 @@ pipeline {
             sh '''
               if [ "$LANGUAGE" = "C" ] || [ "$LANGUAGE" = "All" ]; then
                 cd ${WORKSPACE}/Scripts/
-                chmod 755 C_script.c
-                gcc C_script.c -o C_script
-		./C_script 
-		./C_script >> output.txt
+                chmod 755 c_project.c
+                gcc c_project.c -o c_project
+		./c_project 
+		./c_project >> output.txt
               else
                 echo "$LANGUAGE file is selected! "
               fi
