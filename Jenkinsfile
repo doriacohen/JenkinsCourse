@@ -10,9 +10,7 @@ pipeline {
 		stage('Log File Event') {
 			steps {
 			        sh '''
-                                    touch output.txt
-				    echo(date)
-				    cat date >> output.txt
+				    date >> output.txt
                                    '''
 			}
 		}
