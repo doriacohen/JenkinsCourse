@@ -11,6 +11,7 @@ pipeline {
 			steps {
 			        sh '''
                                     touch output.txt
+				    date >> output.txt
                                    '''
 			}
 		}
