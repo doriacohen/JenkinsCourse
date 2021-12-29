@@ -19,7 +19,7 @@ pipeline {
                     cd ${WORKSPACE}/Scripts/
                     chmod 755 bash_project.sh
                     ./bash_project.sh 
-//                    ./bash_project.sh >> output.txt
+                    ./bash_project.sh >> output.txt
                     else
                     echo "$LANGUAGE file is selected! "
                     fi
@@ -33,7 +33,7 @@ pipeline {
                       cd ${WORKSPACE}/Scripts/
                       chmod 755 python_project.py 
                       python3.9 python_project.py
-//                      ./python_project.py >> output.txt
+                      ./python_project.py >> output.txt
                      else
                      echo "$LANGUAGE file is selected! "
                       fi
@@ -48,7 +48,7 @@ pipeline {
                 chmod 755 c_project.c
                 gcc c_project.c -o c_project_compiled
 		./c_project_compiled 
-//		./c_project >> output.txt
+		./c_project >> output.txt
               else
                 echo "$LANGUAGE file is selected! "
               fi
