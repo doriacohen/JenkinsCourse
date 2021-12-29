@@ -18,7 +18,7 @@ pipeline {
                     if [ "$LANGUAGE" = "Bash" ] || [ "$LANGUAGE" = "All" ]; then
                     cd ${WORKSPACE}/Scripts/
                     chmod 755 bash_project.sh
-                    bash_project.sh 
+                    ./bash_project.sh 
                     ./bash_project.sh >> output.txt
                     else
                     echo "$LANGUAGE file is selected! "
