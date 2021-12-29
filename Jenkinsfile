@@ -54,25 +54,6 @@ pipeline {
 					fi
 					'''
 				}
-	  		}
-	  	stage('Creating log file') {
-        	steps {
-          		sh '''
-                            echo 'Log file var'
-	    	            logFile="${HOME}/logdir/logFile"
-			    echo 'make dir'
-	    		    mkdir -p ${HOME}/logdir/
-            		    if [ -f "${logFile}" ]; then
-                	    echo "A log file is already exists"
-            		    else
-			    echo 'creating file'
-	                    touch ${logFile}
-            		    fi
-			    echo 'copy output to logfile'
-	    	            cat ${WORKSPACE}/scripts/output.txt > ${logFile}
-	    		    date >> ${logFile}
-           		     '''
-         		}
-      		}	   
+	  		}  
 	}
 }
