@@ -19,7 +19,7 @@ pipeline {
 					cd ${WORKSPACE}/Scripts/
 					chmod 755 bash_project.sh
 					./bash_project.sh 
-					./bash_project.sh >> output.txt
+					cat bash_project.sh >> output.txt
 					else
 					echo "$LANGUAGE file is selected! "
 					fi
@@ -33,7 +33,7 @@ pipeline {
 					cd ${WORKSPACE}/Scripts/
 					chmod 755 python_project.py 
 					python3.9 python_project.py
-					./python_project.py >> output.txt
+					cat python_project.py >> output.txt
 					else
 					echo "$LANGUAGE file is selected! "
 					fi
@@ -48,7 +48,7 @@ pipeline {
 					chmod 755 c_project.c
 					gcc c_project.c -o c_project_compiled
 					./c_project_compiled 
-					./c_project >> output.txt
+					cat c_project >> output.txt
 					else
 					echo "$LANGUAGE file is selected! "
 					fi
@@ -58,16 +58,16 @@ pipeline {
 	  	stage('Creating log file') {
         	steps {
           		sh '''
-	    			logFile="${HOME}/logdir/logFile"
-	    			mkdir -p ${HOME}/logdir/
-            		if [ -f "${logFile}" ]; then
-                	echo "A log file is already exists"
-            		else
-	        		touch ${logFile}
-            		fi
-	    			cat ${WORKSPACE}/scripts/output.txt > ${logFile}
-	    			date >> ${logFile}
-           			'''
+	    	            logFile="${HOME}/logdir/logFile"
+	    		    mkdir -p ${HOME}/logdir/
+            		    if [ -f "${logFile}" ]; then
+                	    echo "A log file is already exists"
+            		    else
+	                    touch ${logFile}
+            		    fi
+	    	            cat ${WORKSPACE}/scripts/output.txt > ${logFile}
+	    		    date >> ${logFile}
+           		     '''
          		}
       		}	   
 	}
