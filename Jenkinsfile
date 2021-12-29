@@ -25,7 +25,7 @@ pipeline {
 					./bash_project.sh 
 					cat bash_project.sh >> output.txt
 					else
-					echo "$LANGUAGE file is selected! "
+					echo "Bash file is not selected! "
 					fi
 					'''
 				}
@@ -39,7 +39,7 @@ pipeline {
 					python3.9 python_project.py
 					cat python_project.py >> output.txt
 					else
-					echo "$LANGUAGE file is selected! "
+					echo "Python file is not selected! "
 					fi
 				    '''
 				}
@@ -54,7 +54,7 @@ pipeline {
 					./c_project_compiled 
 					cat c_project.c >> output.txt
 					else
-					echo "$LANGUAGE file is selected! "
+					echo "C file is not selected! "
 					fi
 					'''
 				}
