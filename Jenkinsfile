@@ -32,7 +32,7 @@ pipeline {
                      if [ "$LANGUAGE" = "Python" ] || [ "$LANGUAGE" = "All" ]; then
                       cd ${WORKSPACE}/Scripts/
                       chmod 755 python_project.py 
-                      ./python python_project.py
+                      ./python3.9 python_project.py
                       ./python_project.py >> output.txt
                      else
                      echo "$LANGUAGE file is selected! "
