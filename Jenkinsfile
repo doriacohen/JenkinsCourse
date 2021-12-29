@@ -31,9 +31,9 @@ pipeline {
                 sh '''
                      if [ "$LANGUAGE" = "Python" ] || [ "$LANGUAGE" = "All" ]; then
                       cd ${WORKSPACE}/Scripts/
-                      chmod 755 python_project.py
-                      ${WORKSPACE}/Scripts/python_project.py $LANGUAGE
-                     ${WORKSPACE}/Scripts/python_project.py $LANGUAGE >> output.txt
+                      chmod 755 python_project.py 
+                      ./python_project.py $LANGUAGE
+                      ./python_project.py $LANGUAGE >> output.txt
                      else
                      echo "$LANGUAGE file is selected! "
                       fi
