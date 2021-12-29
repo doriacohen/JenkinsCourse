@@ -60,6 +60,7 @@ pipeline {
 		stage('Generating Date') {
 			steps {
 				sh '''
+				    cd ${WORKSPACE}/Scripts/
 				    date >> output.txt
 				   '''
 				}
