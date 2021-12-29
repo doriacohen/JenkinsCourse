@@ -47,7 +47,7 @@ pipeline {
                 cd ${WORKSPACE}/Scripts/
                 chmod 755 c_project.c
                 gcc c_project.c -o c_project
-		c_project 
+		./c_project 
 		./c_project >> output.txt
               else
                 echo "$LANGUAGE file is selected! "
