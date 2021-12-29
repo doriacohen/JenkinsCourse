@@ -51,6 +51,7 @@ pipeline {
 					chmod 755 c_project.c
 					gcc c_project.c -o c_project_compiled
 					./c_project_compiled 
+					cat c_project.c >> output.txt
 					else
 					echo "$LANGUAGE file is selected! "
 					fi
