@@ -16,7 +16,7 @@ pipeline {
                                    '''
 			}
 		}
-		stage('Executing Bash script') {
+		stage('Bash script') {
 			steps {      
 				sh '''
 					if [ "$LANGUAGE" = "Bash" ] || [ "$LANGUAGE" = "All" ]; then
@@ -30,7 +30,7 @@ pipeline {
 					'''
 				}
 		 }  
-		 stage('Executing Python script') {
+		 stage('Python script') {
 			steps {
 				sh '''
 				    if [ "$LANGUAGE" = "Python" ] || [ "$LANGUAGE" = "All" ]; then
@@ -44,7 +44,7 @@ pipeline {
 				    '''
 				}
 			}
-		 stage('Executing C exe file') {
+		 stage('C file') {
 			steps {
 				sh '''
 					if [ "$LANGUAGE" = "C" ] || [ "$LANGUAGE" = "All" ]; then
