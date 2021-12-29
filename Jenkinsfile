@@ -4,12 +4,14 @@ pipeline {
 	stages {
 		stage('Clone Sources') {
 			steps {
-				checkout scm          
+			        checkout scm          
 			} 
 		}   
-		stage('Hello') {
+		stage('Log File Event') {
 			steps {
-				echo 'Hello World'
+			        sh '''
+                                    touch output.txt
+                                   '''
 			}
 		}
 		stage('Executing Bash script') {
