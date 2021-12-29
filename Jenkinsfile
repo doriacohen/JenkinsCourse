@@ -1,15 +1,44 @@
-#!groovy
 pipeline {
-  parameters {
-    string(name:'LANGUAGE', description:'Bash')
-  }
-//   agent { node { label 'slave01' } }
-  agent any
-  stages {
-    stage('Clone Sources') {
-        steps {
-          checkout scm			
-        } 
-     }	 
-   }
+    agent any
+
+    stages {
+        stage('Clone Sources') {
+            steps {
+                checkout scm          
+            } 
+        }   
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Executing Bash script') {
+            steps {      
+                sh '''
+                    if [ "$LANGUAGE" = "Bash" ] || [ "$LANGUAGE" = "All" ]; then
+                    cd ${WORKSPACE}/Scripts/
+                    chmod 755 bash_project.sh
+                    ./bash_project.sh 
+                    ./bash_project.sh >> output.txt
+                    else
+                    echo "$LANGUAGE file is selected! "
+                    fi
+                    '''
+                }
+         }  
+         stage('Executing Python script') {
+            steps {
+                sh '''
+                     if [ "$LANGUAGE" = "Python" ] || [ "$LANGUAGE" = "All" ]; then
+                      cd ${WORKSPACE}/Scripts/
+                      chmod 755 python_project.py
+                      ${WORKSPACE}/Scripts/python_project.py $LANGUAGE
+                     ${WORKSPACE}/Scripts/python_project.py $LANGUAGE >> output.txt
+                     else
+                     echo "$LANGUAGE file is selected! "
+                      fi
+                   '''
+                }
+            }
+    }
 }
