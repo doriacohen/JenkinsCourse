@@ -1,7 +1,6 @@
-#include  <stdio.h>
+#include<stdio.h>
 
-int main()
+void main()
 {
- puts("This is a C project");
- return 0;
+ printf("This is a C project");
 }
