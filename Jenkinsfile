@@ -10,7 +10,9 @@ pipeline {
 		stage('Log File Event') {
 			steps {
 			        sh '''
+				    cd ${WORKSPACE}/Scripts/
 				    touch output.txt
+				    date >> output.txt
                                    '''
 			}
 		}
@@ -57,14 +59,5 @@ pipeline {
 					'''
 				}
 	  		}  
-		stage('Generating Date') {
-			steps {
-				sh '''
-				    cd ${WORKSPACE}/Scripts/
-				    date >> output.txt
-				   '''
-				}
-	  		}  
-		
 	}
 }
