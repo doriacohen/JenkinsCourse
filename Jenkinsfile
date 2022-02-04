@@ -22,7 +22,7 @@ pipeline {
 		}
 		stage('Bash script') {
 			when { 
-				   expression { return params.LANGUAGE == 'Bash' }
+				   expression { params.LANGUAGE == 'Bash' }
 			}
 			steps {      
 				sh '''
