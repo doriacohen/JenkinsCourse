@@ -2,7 +2,7 @@ pipeline {
 	agent any
 	
 	parameters {
-		choice(name: 'LANGUAGE', choices:['All','Python','Bash', 'C'], description: 'The Language')
+		choice(name: 'LANGUAGE', choices: ['All','Python','Bash', 'C'], description: 'The Language')
 	}
 	stages {
 		stage('Clone Sources') {
@@ -21,7 +21,7 @@ pipeline {
 		}
 		stage('Bash script') {
 			when{
-				expression{ return params.LANGUAGE == 'Bash' || params.LANGUAGE == 'All' }
+				expression { return params.LANGUAGE == 'Bash' }
 			}
 			steps {      
 				sh '''
