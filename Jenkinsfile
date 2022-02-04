@@ -17,7 +17,7 @@ pipeline {
 		}
 		stage('Bash script') {
 			when{
-				expression{ "$LANGUAGE" == "Bash" ] || [ "$LANGUAGE" == "All" ] }
+				expression{ ["$LANGUAGE" == "Bash" ] || [ "$LANGUAGE" == "All" ] }
 			}
 			steps {      
 				sh '''
