@@ -1,5 +1,6 @@
 pipeline {
 	agent any
+	
 	stages {
 		stage('Clone Sources') {
 			steps {
@@ -17,9 +18,12 @@ pipeline {
 		}
 		stage('Bash script') {
 			when{
-				expression{ "$LANGUAGE" == "Bash" ] || [ "$LANGUAGE" == "All" ] }
+				expression{ return params.LANGUAGE == 'Bash' || params.LANGUAGE == 'All' }
 			}
 			steps {      
+				sh 'echo "bla bla bla"'
+				sh '*** doria $LANGUAGE'
+				
 				sh '''
 					cd ${WORKSPACE}/Scripts/
 					chmod 755 bash_project.sh
@@ -33,7 +37,7 @@ pipeline {
 		 }  
 		 stage('Python script') {
 		 	when{
-				expression{ "$LANGUAGE" == "Python" ] || [ "$LANGUAGE" == "All" ] }
+				expression{ return params.LANGUAGE == 'Python' || params.LANGUAGE == 'All' }
 			}
 			steps {
 				sh '''
@@ -49,7 +53,7 @@ pipeline {
 			}
 		 stage('C file') {
 		 	when{
-				expression{ "$LANGUAGE" == "C" ] || [ "$LANGUAGE" == "All" ] }
+				expression{ return params.LANGUAGE == 'C' || params.LANGUAGE == 'All' }
 			}
 			steps {
 				sh '''
