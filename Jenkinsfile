@@ -16,9 +16,9 @@ pipeline {
 			}
 		}
 		stage('Bash script') {
-			when { 
+			(when { 
 				equals expected: 'Bash', actual: "$LANGUAGE"
-			}
+			})
 			steps {      
 				sh '''
 					cd ${WORKSPACE}/Scripts/
