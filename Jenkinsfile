@@ -16,8 +16,8 @@ pipeline {
 			}
 		}
 		stage('Bash script') {
-			when {
-				expression{ return "$LANGUAGE" == "Bash" }
+			when { 
+				equals expected: 'Bash', actual: "$LANGUAGE"
 			}
 			steps {      
 				sh '''
