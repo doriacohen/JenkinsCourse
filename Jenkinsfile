@@ -2,7 +2,7 @@ pipeline {
 	agent any
 	
 	parameters {
-		choice(name: 'LANGUAGE', choices: ['All','Python','Bash', 'C'], description: 'The Language')
+		choice(name: 'LANGUAGE', choices: ['All','Python','Bash', 'C'], description: 'LANGUAGE')
 	}
 	stages {
 		stage('Clone Sources') {
@@ -29,13 +29,9 @@ pipeline {
 					chmod 755 bash_project.sh
 					./bash_project.sh 
 					cat bash_project.sh >> output.txt
-					else
-					echo "Bash file is not selected! "
-					fi
 					'''
 				}
 		 }  
-		else{
 		 stage('Python script') {
 		 	when{
 				expression{ return params.LANGUAGE == 'Python' || params.LANGUAGE == 'All' }
@@ -52,7 +48,7 @@ pipeline {
 				    '''
 				}
 			 }
-		}
+		
 		 stage('C file') {
 		 	when{
 				expression{ return params.LANGUAGE == 'C' || params.LANGUAGE == 'All' }
