@@ -35,11 +35,11 @@ pipeline {
 					'''
 				}
 		 }  
+		else{
 		 stage('Python script') {
 		 	when{
 				expression{ return params.LANGUAGE == 'Python' || params.LANGUAGE == 'All' }
 			}
-			 else{
 			steps {
 				sh '''
 					cd ${WORKSPACE}/Scripts/
@@ -51,7 +51,8 @@ pipeline {
 					fi
 				    '''
 				}
-			 }}
+			 }
+		}
 		 stage('C file') {
 		 	when{
 				expression{ return params.LANGUAGE == 'C' || params.LANGUAGE == 'All' }
