@@ -42,9 +42,7 @@ pipeline {
 					chmod 755 python_project.py 
 					python3.9 python_project.py
 					cat python_project.py >> output.txt
-					else
-					echo "Python file is not selected! "
-					fi
+					
 				    '''
 				}
 			 }
@@ -60,9 +58,7 @@ pipeline {
 					gcc c_project.c -o c_project_compiled
 					./c_project_compiled 
 					cat c_project.c >> output.txt
-					else
-					echo "C file is not selected! "
-					fi
+					
 					'''
 				}
 	  		}  
